@@ -1,0 +1,28 @@
+// Colors
+$color-silver: #828a95;
+$color-beau: #ccd7e4;
+
+// Helpers
+$g: 4px;
+$g2: $g * 2;
+$g3: $g * 3;
+$g4: $g * 4;
+
+// Animations
+@keyframes aurora {
+    0% {
+        background-position: left top;
+    }
+    25% {
+        background-position: right top;
+    }
+    50% {
+        background-position: right bottom;
+    }
+    75% {
+        background-position: left bottom;
+    }
+    100% {
+        background-position: left top;
+    }
+}
