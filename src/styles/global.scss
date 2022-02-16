@@ -8,28 +8,6 @@ body {
     background: linear-gradient(45deg, #32a6ff 0%, #3f6fff 49%, #8d54ff 82%);
     background-size: 200%;
     animation: aurora 10s infinite;
-
-    .aurora {
-        background: radial-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.15));
-        background-size: 200%;
-        background-size: 200%;
-        animation: aurora 10s infinite;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        position: fixed;
-        z-index: 0;
-        padding: 72px 32px;
-        overflow-y: auto;
-
-        h1 {
-            font-size: 24px;
-            font-weight: 700;
-            color: #fafafa;
-            text-shadow: 1px 1px rgba(0, 0, 0, 0.1);
-        }
-    }
 }
 
 body,
