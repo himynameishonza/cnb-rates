@@ -1,5 +1,3 @@
-import {arrayToObject} from './arrayToObject';
-
 export const txtParser = (text, linesToRemove, lineDelimiter) => {
     // Remove n lines from the text file and add delimiter at end of each line
     let textWithoutHeader = text.split('\n').slice(linesToRemove).join(lineDelimiter);

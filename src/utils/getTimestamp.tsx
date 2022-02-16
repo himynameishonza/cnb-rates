@@ -10,10 +10,10 @@ export const getTimestamp = () => {
 
     // Date
     let dateDay = date.getDate();
-    let dateMonth = date.getMonth();
+    let dateMonth = date.getMonth() + 1;
     let dateYear = date.getFullYear();
 
-    let fullDate = dateDay + '. ' + dateMonth + ' ' + dateYear;
+    let fullDate = dateDay + '. ' + dateMonth + '. ' + dateYear;
 
     // Time
     let dateHours = leadingZero(date.getHours());

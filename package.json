@@ -3,9 +3,6 @@
     "description": "Homework and showcase for Momence.com",
     "dependencies": {
         "@types/styled-components": "^5.1.22",
-        "classnames": "^2.3.1",
-        "ky": "^0.23.0",
-        "ky-universal": "^0.8.2",
         "lint": "next lint",
         "next": "^11.1.0",
         "nextjs-cors": "^2.1.0",

@@ -48,7 +48,7 @@ const Home = () => {
 
     useEffect(() => {
         setLastUpdate(getTimestamp);
-    }, []);
+    }, [lastUpdate]);
 
     return (
         <>
