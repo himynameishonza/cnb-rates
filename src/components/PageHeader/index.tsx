@@ -8,7 +8,7 @@ const PageHeader = ({lastUpdate, refresh}) => {
                 <Styled.Small>Poslední aktualizace {lastUpdate}</Styled.Small>
             </div>
 
-            <Styled.Button onClick={() => refresh()}>Aktualizovat</Styled.Button>
+            <Styled.Button onClick={refresh}>Aktualizovat</Styled.Button>
         </Styled.PageHeader>
     );
 };

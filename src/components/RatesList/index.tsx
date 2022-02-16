@@ -46,6 +46,7 @@ const RatesList = () => {
                                 <a
                                     target="_blank"
                                     title="Kurzovní lístek"
+                                    rel="noreferrer"
                                     href="https://www.cnb.cz/cs/financni-trhy/devizovy-trh/kurzy-devizoveho-trhu/kurzy-devizoveho-trhu/"
                                 >
                                     Aktuální kurzovní lístek na stránkách ČNB
