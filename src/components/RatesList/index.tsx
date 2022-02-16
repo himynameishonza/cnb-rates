@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import CurrencyFlag from 'react-currency-flags';
+import {useRates} from '../../api';
 
 const TableStyled = styled.table`
     width: 100%;
@@ -64,25 +65,18 @@ const TableBodyCellLoadingStyled = styled.td`
         color: black;
         padding-top: 12px;
         display: block;
-        font-size: 16px;
+        font-size: 14px;
+        transition: color 0.24s;
+
+        :hover {
+            color: #fafafa;
+        }
     }
 `;
 
-type DataItemProps = {
-    countryName: string,
-    currencyName: string,
-    amount: number,
-    currencyCode: string,
-    rate: number,
-};
+const RatesList = () => {
+    const {data, isLoading} = useRates();
 
-type RatesTableProps = {
-    data: DataItemProps[],
-    isLoading: boolean,
-    hasFailed: boolean,
-};
-
-const RatesList = ({data, isLoading, hasFailed}: RatesTableProps) => {
     return (
         <TableStyled>
             <thead>
@@ -103,7 +97,7 @@ const RatesList = ({data, isLoading, hasFailed}: RatesTableProps) => {
                     </tr>
                 )}
 
-                {hasFailed && (
+                {!data && !isLoading && (
                     <tr>
                         <TableBodyCellLoadingStyled colSpan={5}>
                             Načtení kurzovního lístku se nezdařilo.
@@ -119,27 +113,24 @@ const RatesList = ({data, isLoading, hasFailed}: RatesTableProps) => {
                     </tr>
                 )}
 
-                {!isLoading &&
-                    !hasFailed &&
-                    data &&
-                    data.map((dataItem: DataItemProps, index: number) => {
-                        return (
-                            <tr key={index}>
-                                <TableBodyCellStyled>
-                                    <CurrencyFlag
-                                        currency={dataItem.currencyCode}
-                                        width={32}
-                                        title={dataItem.countryName}
-                                    />
-                                    <p>{dataItem.countryName}</p>
-                                </TableBodyCellStyled>
-                                <TableBodyCellStyled>{dataItem.currencyName}</TableBodyCellStyled>
-                                <TableBodyCellStyled>{dataItem.amount}</TableBodyCellStyled>
-                                <TableBodyCellStyled>{dataItem.currencyCode}</TableBodyCellStyled>
-                                <TableBodyCellStyled>{dataItem.rate}</TableBodyCellStyled>
-                            </tr>
-                        );
-                    })}
+                {data?.map((dataItem, index) => {
+                    return (
+                        <tr key={index}>
+                            <TableBodyCellStyled>
+                                <CurrencyFlag
+                                    currency={dataItem.currencyISO}
+                                    width={32}
+                                    title={dataItem.countryName}
+                                />
+                                <p>{dataItem.countryName}</p>
+                            </TableBodyCellStyled>
+                            <TableBodyCellStyled>{dataItem.currencyName}</TableBodyCellStyled>
+                            <TableBodyCellStyled>{dataItem.amount}</TableBodyCellStyled>
+                            <TableBodyCellStyled>{dataItem.currencyISO}</TableBodyCellStyled>
+                            <TableBodyCellStyled>{dataItem.rate}</TableBodyCellStyled>
+                        </tr>
+                    );
+                })}
             </tbody>
         </TableStyled>
     );
