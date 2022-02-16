@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import styled from 'styled-components';
 import HeadMeta from '../components/HeadMeta';
 import PageHeader from '../components/PageHeader';
