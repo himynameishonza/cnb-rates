@@ -53,7 +53,7 @@ export const Content =
         svg {
             width: 16px;
             fill: white;
-            transform: ${props => (props.mode ? 'scaleX(1)' : 'scaleX(-1)')};
+            transform: ${props => (props.mode ? 'scaleY(-1)' : 'scaleY(1)')};
         }
     }
     div {

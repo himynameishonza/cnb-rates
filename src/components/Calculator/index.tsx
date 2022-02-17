@@ -1,17 +1,26 @@
 import * as Styled from './styles';
 import CurrencyFlag from 'react-currency-flags';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
+import * as NumberFormat from 'react-currency-format';
 
 const Calculator = ({data, close}) => {
+    const [mode, setMode] = useState(true);
     const [sourceValue, setSourceValue] = useState(data.amount);
-    const [mode, setMode] = useState(false);
+    const [destinationValue, setDestinationValue] = useState(data.rate);
 
-    const onInputchange = e => {
-        setSourceValue(e.target.value);
+    const handleChange = values => {
+        setSourceValue(values.floatValue);
+        mode
+            ? setDestinationValue((values.floatValue * data.rate) / data.amount)
+            : setDestinationValue(values.floatValue / data.rate);
     };
 
-    const onDestinationChange = e => {
-        setSourceValue(e.target.value);
+    const switchMode = () => {
+        setMode(!mode);
+        let tempSource = sourceValue;
+        let tempDestination = destinationValue;
+        setDestinationValue(tempSource);
+        setSourceValue(tempDestination);
     };
 
     return (
@@ -32,7 +41,7 @@ const Calculator = ({data, close}) => {
                     </a>
                 </Styled.ContentHeader>
                 <Styled.Content mode={mode}>
-                    <a onClick={() => setMode(!mode)}>
+                    <a onClick={() => switchMode()}>
                         <svg viewBox="0 0 384 512">
                             <path
                                 d="m379.29 132.69-80-96a16 16 0 0 0 -22.62 0l-80 96c-10.02 10.05-2.89 27.31 11.33 27.31h48v304a16 16 0 0 0 16 16h32a16 16 0 0 0 16-16v-304h48c14.19 0 21.36-17.24 11.29-27.31z"
@@ -42,25 +51,24 @@ const Calculator = ({data, close}) => {
                         </svg>
                     </a>
                     <div>
-                        <input
-                            type="number"
-                            id="source"
-                            name="sourceInput"
-                            step={data.amount}
+                        <NumberFormat
                             value={sourceValue}
-                            onChange={mode ? onInputchange : onDestinationChange}
-                            min={0}
+                            thousandSeparator={' '}
+                            decimalSeparator={','}
+                            decimalScale={3}
+                            step={data.amount}
+                            onValueChange={values => handleChange(values)}
                         />
-                        <label htmlFor="amount">{mode ? 'CZK' : data.currencyISO}</label>
+                        <label>{mode ? data.currencyISO : 'CZK'}</label>
 
-                        <input
-                            type="number"
-                            id="destination"
-                            name="destinationInput"
+                        <NumberFormat
+                            value={destinationValue}
+                            thousandSeparator={' '}
+                            decimalSeparator={','}
+                            decimalScale={3}
                             disabled
-                            value={(sourceValue / data.amount) * data.rate}
                         />
-                        <label htmlFor="result">{mode ? data.currencyISO : 'CZK'}</label>
+                        <label>{mode ? 'CZK' : data.currencyISO}</label>
                     </div>
                 </Styled.Content>
             </Styled.ModalContent>

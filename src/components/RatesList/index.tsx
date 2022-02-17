@@ -3,6 +3,7 @@ import CurrencyFlag from 'react-currency-flags';
 import {useRates} from '../../api';
 import {useState} from 'react';
 import Calculator from '../Calculator';
+import * as CurrencyFormat from 'react-currency-format';
 
 const RatesList = () => {
     const {data, isLoading} = useRates();
@@ -73,7 +74,14 @@ const RatesList = () => {
                                 <Styled.TableBodyCell hideOnMobile centered>
                                     {dataItem.currencyISO}
                                 </Styled.TableBodyCell>
-                                <Styled.TableBodyCell>{dataItem.rate}</Styled.TableBodyCell>
+                                <Styled.TableBodyCell>
+                                    <CurrencyFormat
+                                        value={dataItem.rate}
+                                        displayType={'text'}
+                                        decimalSeparator={','}
+                                        thousandSeparator={' '}
+                                    />
+                                </Styled.TableBodyCell>
                             </tr>
                         );
                     })}
