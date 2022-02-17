@@ -6,7 +6,7 @@ Homework and showcase for Momence.com
 
 `yarn`
 
-`yarn run dev`
+`yarn dev`
 
 ## Build and TypeScript check:
 
