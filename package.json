@@ -2,6 +2,7 @@
     "name": "cnb-rates",
     "description": "Homework and showcase for Momence.com",
     "dependencies": {
+        "@types/react-currency-format": "^1.0.0",
         "@types/styled-components": "^5.1.22",
         "lint": "next lint",
         "next": "^11.1.0",

@@ -1,7 +1,7 @@
 import HeadMeta from '../components/HeadMeta';
 import RatesList from '../components/RatesList';
 import {dehydrate, QueryClient} from 'react-query';
-import {fetchRates} from '../api';
+import {fetchRates} from './api/utils';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`

@@ -1,7 +1,7 @@
 import {useQuery} from 'react-query';
-import {txtParser} from '../utils/txtParser';
+import {txtParser} from '../../utils/txtParser';
 
-const fetchRates = async url => {
+const fetchRates = async (url: string) => {
     const res = await fetch(url);
 
     const data = await res.text();

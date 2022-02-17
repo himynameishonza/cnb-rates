@@ -1,6 +1,6 @@
 import * as Styled from './styles';
 
-const PageHeader = ({lastUpdate, refresh}) => {
+const PageHeader = ({lastUpdate, refresh, isLoading}) => {
     return (
         <Styled.PageHeader>
             <div>
@@ -8,7 +8,7 @@ const PageHeader = ({lastUpdate, refresh}) => {
                 <Styled.Small>Poslední aktualizace {lastUpdate}</Styled.Small>
             </div>
 
-            <Styled.Button onClick={refresh}>Aktualizovat</Styled.Button>
+            <Styled.Button onClick={refresh}>{isLoading ? '...' : 'Aktualizovat'}</Styled.Button>
         </Styled.PageHeader>
     );
 };

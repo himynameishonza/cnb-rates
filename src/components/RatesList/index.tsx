@@ -1,9 +1,9 @@
 import * as Styled from './styles';
 import CurrencyFlag from 'react-currency-flags';
-import {useRates} from '../../api';
-import {useEffect, useState} from 'react';
+import {useRates} from '../../pages/api/utils';
+import {useState} from 'react';
 import Calculator from '../Calculator';
-import * as CurrencyFormat from 'react-currency-format';
+import CurrencyFormat from 'react-currency-format';
 import PageHeader from '../PageHeader';
 import {getTimestamp} from '../../utils/getTimestamp';
 
@@ -13,7 +13,7 @@ const RatesList = () => {
     const [lastUpdate, setLastUpdate] = useState(null);
     const {data, isLoading, refetch} = useRates(() => setLastUpdate(getTimestamp()));
 
-    const openCalculator = index => {
+    const openCalculator = (index: number) => {
         setCalculator(true);
         setCalculatorData(data[index]);
     };
@@ -21,7 +21,7 @@ const RatesList = () => {
     return (
         <>
             {calculator && <Calculator data={calculatorData} close={() => setCalculator(false)} />}
-            <PageHeader lastUpdate={lastUpdate} refresh={refetch} />
+            <PageHeader lastUpdate={lastUpdate} refresh={refetch} isLoading={isLoading} />
             <Styled.Table>
                 <thead>
                     <tr>
@@ -37,9 +37,9 @@ const RatesList = () => {
                 <tbody>
                     {isLoading && (
                         <tr>
-                            <Styled.TableBodyCell colSpan={5}>
+                            <Styled.TableBodyCellLoading colSpan={5}>
                                 Načítám kurzovní lístek...
-                            </Styled.TableBodyCell>
+                            </Styled.TableBodyCellLoading>
                         </tr>
                     )}
 

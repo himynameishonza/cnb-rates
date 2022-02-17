@@ -1,7 +1,7 @@
 import * as Styled from './styles';
 import CurrencyFlag from 'react-currency-flags';
 import {useState} from 'react';
-import * as NumberFormat from 'react-currency-format';
+import NumberFormat from 'react-currency-format';
 
 const Calculator = ({data, close}) => {
     const [mode, setMode] = useState(true);
