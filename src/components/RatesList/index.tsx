@@ -1,14 +1,17 @@
 import * as Styled from './styles';
 import CurrencyFlag from 'react-currency-flags';
 import {useRates} from '../../api';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import Calculator from '../Calculator';
 import * as CurrencyFormat from 'react-currency-format';
+import PageHeader from '../PageHeader';
+import {getTimestamp} from '../../utils/getTimestamp';
 
 const RatesList = () => {
-    const {data, isLoading} = useRates();
     const [calculator, setCalculator] = useState(false);
     const [calculatorData, setCalculatorData] = useState(null);
+    const [lastUpdate, setLastUpdate] = useState(null);
+    const {data, isLoading, refetch} = useRates(() => setLastUpdate(getTimestamp()));
 
     const openCalculator = index => {
         setCalculator(true);
@@ -18,6 +21,7 @@ const RatesList = () => {
     return (
         <>
             {calculator && <Calculator data={calculatorData} close={() => setCalculator(false)} />}
+            <PageHeader lastUpdate={lastUpdate} refresh={refetch} />
             <Styled.Table>
                 <thead>
                     <tr>

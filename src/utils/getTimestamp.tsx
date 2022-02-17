@@ -1,5 +1,5 @@
 export const getTimestamp = () => {
-    function leadingZero(num) {
+    function leadingZero(num: any) {
         if (num < 10) {
             num = '0' + num;
         }

@@ -17,7 +17,7 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build",
-        "start": "next start",
+        "start": "CNB_RATES_TXT=$CNB_RATES_TXT next start",
         "lint": "next lint"
     },
     "devDependencies": {

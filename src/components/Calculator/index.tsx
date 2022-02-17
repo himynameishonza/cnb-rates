@@ -1,6 +1,6 @@
 import * as Styled from './styles';
 import CurrencyFlag from 'react-currency-flags';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import * as NumberFormat from 'react-currency-format';
 
 const Calculator = ({data, close}) => {
@@ -8,7 +8,7 @@ const Calculator = ({data, close}) => {
     const [sourceValue, setSourceValue] = useState(data.amount);
     const [destinationValue, setDestinationValue] = useState(data.rate);
 
-    const handleChange = values => {
+    const handleChange = (values: any) => {
         setSourceValue(values.floatValue);
         mode
             ? setDestinationValue((values.floatValue * data.rate) / data.amount)
@@ -57,7 +57,7 @@ const Calculator = ({data, close}) => {
                             decimalSeparator={','}
                             decimalScale={3}
                             step={data.amount}
-                            onValueChange={values => handleChange(values)}
+                            onValueChange={(values: any) => handleChange(values)}
                         />
                         <label>{mode ? data.currencyISO : 'CZK'}</label>
 

@@ -1,10 +1,7 @@
-import {useEffect, useState} from 'react';
 import HeadMeta from '../components/HeadMeta';
-import PageHeader from '../components/PageHeader';
 import RatesList from '../components/RatesList';
-import {getTimestamp} from '../utils/getTimestamp';
 import {dehydrate, QueryClient} from 'react-query';
-import {fetchRates, useRates} from '../api';
+import {fetchRates} from '../api';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -39,22 +36,10 @@ export const Footer = styled.footer`
 `;
 
 const Home = () => {
-    const [lastUpdate, setLastUpdate] = useState(null);
-
-    const fetch = () => {
-        setLastUpdate(getTimestamp);
-        useRates;
-    };
-
-    useEffect(() => {
-        setLastUpdate(getTimestamp);
-    }, [lastUpdate]);
-
     return (
         <>
             <HeadMeta />
             <Wrapper>
-                <PageHeader lastUpdate={lastUpdate} refresh={() => fetch()} />
                 <RatesList />
                 <Footer>Data postkytuje Česká národní banka</Footer>
             </Wrapper>
@@ -62,10 +47,11 @@ const Home = () => {
     );
 };
 
+// Server-side
 export async function getStaticProps() {
     const queryClient = new QueryClient();
 
-    await queryClient.prefetchQuery(['data'], () => fetchRates());
+    await queryClient.prefetchQuery(['data'], () => fetchRates(process.env.CNB_RATES_TXT));
 
     return {
         props: {

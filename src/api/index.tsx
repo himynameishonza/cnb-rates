@@ -1,10 +1,8 @@
 import {useQuery} from 'react-query';
 import {txtParser} from '../utils/txtParser';
 
-const fetchRates = async () => {
-    const res = await fetch(
-        `https://www.cnb.cz/cs/financni-trhy/devizovy-trh/kurzy-devizoveho-trhu/kurzy-devizoveho-trhu/denni_kurz.txt`
-    );
+const fetchRates = async url => {
+    const res = await fetch(url);
 
     const data = await res.text();
     const parsedData = txtParser(data, 2, '\n');
@@ -12,8 +10,8 @@ const fetchRates = async () => {
     return parsedData;
 };
 
-const useRates = () => {
-    return useQuery(['data'], () => fetchRates());
+const useRates = (onSuccess?: () => any) => {
+    return useQuery(['data'], () => fetchRates('api/data'), {onSuccess});
 };
 
 export {useRates, fetchRates};

@@ -1,4 +1,4 @@
-export const arrayToObject = (array, customKey) => {
+export const arrayToObject = (array: [], customKey: string) => {
     const initialValue = {};
     return array.reduce((obj, item) => {
         return {
